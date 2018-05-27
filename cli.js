@@ -10,6 +10,7 @@ const pkg = require('./package.json');
 const urlJoin = require('url-join');
 
 const trimLines = str => str.replace(/^\n+/, '').replace(/\n+$/, '');
+const splitSentences = str => str.replace(/(\.\s*)(?!$)/g, '.\n');
 
 const duck = trimLines(`
   \\
@@ -57,5 +58,5 @@ function duckiesay(message, cow = duck) {
 async function getQuote(quote = '') {
   const url = urlJoin(pkg.config.apiUrl, `/says/${quote}`);
   const { id, says } = (await got(url, { json: true })).body;
-  return [says.replace(/(\.\s*)(?!$)/g, '.\n'), id];
+  return [splitSentences(says), id];
 }
