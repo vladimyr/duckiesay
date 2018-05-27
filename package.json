@@ -1,6 +1,6 @@
 {
   "name": "duckiesay",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Speaking duckie inside your terminal",
   "bin": {
     "duckiesay": "cli.js"
