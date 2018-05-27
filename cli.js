@@ -13,10 +13,16 @@ const urlJoin = require('url-join');
 const trimLines = str => str.replace(/^\n+/, '').replace(/\n+$/, '');
 const splitSentences = str => str.replace(/(\.\s*)(?!$)/g, '.\n');
 
-const duck = trimLines(`
+const bwDuck = trimLines(`
   \\
    \\ >()_
-      (__)__ _
+    __(__)__ _
+`);
+
+const duck = trimLines(chalk`
+  \\
+   \\ {red >}{yellow ()_}
+    {blue __}{yellow (}{blue __}{yellow )}{blue __ _}
 `);
 
 const banner = [
@@ -31,6 +37,7 @@ Usage
   $ ${pkg.name} <input>
 
 Options
+  --no-color     Use black'n'white duck
   -h, --help     Show help
   -v, --version  Show version number
 
@@ -44,20 +51,22 @@ Report issue: {green ${pkg.bugs.url}}`;
 
 const flags = {
   help: { alias: 'h' },
-  version: { alias: 'v' }
+  version: { alias: 'v' },
+  color: { type: 'boolean', default: true }
 };
 
 (async () => {
   const cli = meow(help, { flags });
   const input = cli.input.join(' ') || await getStdin();
   const [message, id] = input ? [input] : await getQuote();
-  console.log(duckiesay(message));
+  console.log(duckiesay(message, cli.flags.color));
   if (!id) return;
   console.log();
   console.log(urlJoin(pkg.config.url, `/${id}`));
 })();
 
-function duckiesay(message, cow = duck) {
+function duckiesay(message, color = true) {
+  const cow = color ? duck : bwDuck;
   return cowsay(cow)`${message.trim()}`;
 }
 
