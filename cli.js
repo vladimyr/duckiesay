@@ -2,6 +2,7 @@
 
 'use strict';
 
+const chalk = require('chalk');
 const cowsay = require('cowsay-tag');
 const getStdin = require('get-stdin');
 const got = require('got');
@@ -18,8 +19,13 @@ const duck = trimLines(`
       (__)__ _
 `);
 
-const help = `
-${duckiesay('What does the duckie say?\nQuack, quack.')}
+const banner = [
+  ['What does the duckie say?', chalk`{red What does the {bold.yellow duckie} say?}`],
+  ['Quack, quack.', chalk`{yellow Quack, quack.}`]
+];
+
+const help = chalk`
+${outputBanner(banner)}
 
 Usage
   $ ${pkg.name} <input>
@@ -33,8 +39,8 @@ Examples
   $ ${pkg.name} quack quack
   $ echo 'quack quack' | duckiesay
 
-Homepage:     ${pkg.homepage}
-Report issue: ${pkg.bugs.url}`;
+Homepage:     {green ${pkg.homepage}}
+Report issue: {green ${pkg.bugs.url}}`;
 
 const flags = {
   help: { alias: 'h' },
@@ -59,4 +65,14 @@ async function getQuote(quote = '') {
   const url = urlJoin(pkg.config.apiUrl, `/says/${quote}`);
   const { id, says } = (await got(url, { json: true })).body;
   return [splitSentences(says), id];
+}
+
+// NOTE: This is necessary because `cowsay-tag`
+//       does NOT support ansi escape sequences!
+function outputBanner(lines) {
+  const out = duckiesay(lines.map(it => it[0]).join('\n'));
+  return lines.reduce((acc, [str, colorized]) => {
+    acc = acc.replace(str, colorized);
+    return acc;
+  }, out);
 }
