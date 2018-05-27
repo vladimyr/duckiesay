@@ -1,0 +1,7 @@
+.editorconfig
+.git*
+.jshint*
+.eslint*
+.npmignore
+.travis.yml
+renovate.json
