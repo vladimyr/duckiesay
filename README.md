@@ -43,6 +43,7 @@ Examples
   $ duckiesay  # gets random quote from remote api
   $ duckiesay quack quack
   $ echo 'quack quack' | duckiesay
+  $ npx samuel-ipsum -t header | duckiesay
 
 Homepage:     https://github.com/vladimyr/duckiesay
 Report issue: https://github.com/vladimyr/duckiesay/issues

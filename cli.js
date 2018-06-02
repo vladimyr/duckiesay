@@ -45,6 +45,7 @@ Examples
   $ duckiesay  # gets random quote from remote api
   $ ${pkg.name} quack quack
   $ echo 'quack quack' | duckiesay
+  $ npx samuel-ipsum -t header | duckiesay
 
 Homepage:     {green ${pkg.homepage}}
 Report issue: {green ${pkg.bugs.url}}`;
