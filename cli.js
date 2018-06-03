@@ -45,10 +45,10 @@ Usage
   $ ${pkg.name} <input>
 
 Options
-  --no-color     Use black'n'white duck
-  --no-animation Use still duck
-  -h, --help     Show help
-  -v, --version  Show version number
+  --no-color      Use black'n'white duck
+  --no-animation  Use still duck
+  --help, -h      Show help
+  --version, -v   Show version number
 
 Examples
   $ duckiesay  # gets random quote from remote api
