@@ -27,10 +27,10 @@ const duck = frame => trimLines(chalk`
     \\   {yellow _}
       {red ${frame}}{yellow (.)__}
        {yellow (___/}
-   {blue ~ ~~~~~~~~~~~~~ ~}
-  {blue ~ ~ ~ ~ ~ ~ ~ ~ ~ ~}
-   {blue ~ ~ ~ ~ ~ ~ ~ ~ ~}
-      {blue ~ ~ ~ ~ ~ ~}
+  {blue ~ ~~~~~~~~~~~~~ ~}
+ {blue ~ ~ ~ ~ ~ ~ ~ ~ ~ ~}
+  {blue ~ ~ ~ ~ ~ ~ ~ ~ ~}
+     {blue ~ ~ ~ ~ ~ ~}
 `);
 
 const banner = chalk`
