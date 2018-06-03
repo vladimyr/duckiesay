@@ -12,8 +12,9 @@ const pkg = require('./package.json');
 const urlJoin = require('url-join');
 const wrapAnsi = require('wrap-ansi');
 
-const trimLines = str => str.replace(/^\n+/, '').replace(/\n+$/, '');
+const normalize = str => str.trim().replace(/\t/g, '    ');
 const splitSentences = str => str.replace(/(\.\s*)(?!$)/g, '.\n');
+const trimLines = str => str.replace(/^\n+/, '').replace(/\n+$/, '');
 
 const beaks = ['>', '='];
 let i = 0;
@@ -85,7 +86,7 @@ function duckiesay(message, animation = true) {
 }
 
 function messageBox(message, options = {}) {
-  return boxen(wrapAnsi(message.trim(), 72), {
+  return boxen(wrapAnsi(normalize(message, 72)), {
     margin: { left: 1 },
     padding: 1,
     borderStyle: 'round',
