@@ -23,13 +23,20 @@ $ duckiesay --help
 
 Speaking duckie inside your terminal
 
- ___________________________
-/ What does the duckie say? \
-\ Quack, quack.             /
- ---------------------------
-  \
-   \ >()_
-    __(__)__ _
+╭───────────────────────────────╮
+│                               │
+│   What does the duckie say?   │
+│   Quack, quack.               │
+│                               │
+╰───────────────────────────────╯
+   \
+    \   _
+      >(.)__
+       (___/
+  ~ ~~~~~~~~~~~~~ ~
+ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+  ~ ~ ~ ~ ~ ~ ~ ~ ~
+     ~ ~ ~ ~ ~ ~
 
 Usage
   $ duckiesay <input>
