@@ -86,7 +86,8 @@ function duckiesay(message, animation = true) {
 }
 
 function messageBox(message, options = {}) {
-  return boxen(wrapAnsi(normalize(message, 72)), {
+  const text = wrapAnsi(normalize(message), 72);
+  return boxen(text, {
     margin: { left: 1 },
     padding: 1,
     borderStyle: 'round',
