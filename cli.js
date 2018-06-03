@@ -25,7 +25,7 @@ beaks.next = () => {
 const duck = frame => trimLines(chalk`
    \\
     \\   {yellow _}
-      {red ${frame}}{yellow (.)__}
+      {red ${frame}}{yellow (·)__}
        {yellow (___/}
   {blue ~ ~~~~~~~~~~~~~ ~}
  {blue ~ ~ ~ ~ ~ ~ ~ ~ ~ ~}
