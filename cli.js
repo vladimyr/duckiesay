@@ -10,34 +10,27 @@ const logUpdate = require('log-update');
 const meow = require('meow');
 const pkg = require('./package.json');
 const urlJoin = require('url-join');
+const wrapAnsi = require('wrap-ansi');
 
 const trimLines = str => str.replace(/^\n+/, '').replace(/\n+$/, '');
 const splitSentences = str => str.replace(/(\.\s*)(?!$)/g, '.\n');
 
 const beaks = ['>', '='];
-
 let i = 0;
+beaks.next = () => {
+  i = ++i % beaks.length;
+  return beaks[i];
+};
 
 const duck = frame => trimLines(chalk`
    \\
-    \\  {yellow _
-      {red ${frame}}(.)__
-       (___/}
-{blue    ~ ~~~~~~~~~~~~~ ~
-  ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-   ~ ~ ~ ~ ~ ~ ~ ~ ~
-      ~ ~ ~ ~ ~ ~}
-`);
-
-const bwDuck = frame => trimLines(`
-   \\
-    \\   _
-      ${frame}(.)__
-       (___/
-  ~ ~~~~~~~~~~~~~ ~
- ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-  ~ ~ ~ ~ ~ ~ ~ ~ ~
-     ~ ~ ~ ~ ~ ~
+    \\   {yellow _}
+      {red ${frame}}{yellow (.)__}
+       {yellow (___/}
+   {blue ~ ~~~~~~~~~~~~~ ~}
+  {blue ~ ~ ~ ~ ~ ~ ~ ~ ~ ~}
+   {blue ~ ~ ~ ~ ~ ~ ~ ~ ~}
+      {blue ~ ~ ~ ~ ~ ~}
 `);
 
 const banner = chalk`
@@ -45,7 +38,7 @@ const banner = chalk`
 {yellow Quack, quack.}`;
 
 const help = chalk`
-${messageBox(banner)}
+${messageBox(banner, { margin: 0 })}
 ${duck(beaks[0])}
 
 Usage
@@ -68,7 +61,6 @@ Report issue: {green ${pkg.bugs.url}}`;
 const flags = {
   help: { alias: 'h' },
   version: { alias: 'v' },
-  color: { type: 'boolean', default: true },
   animation: { type: 'boolean', default: true }
 };
 
@@ -80,24 +72,24 @@ const flags = {
     console.log(urlJoin(pkg.config.url, `/${id}`));
     console.log();
   }
-  duckiesay(message, cli.flags.color, cli.flags.animation);
+  duckiesay(message, cli.flags.animation);
 })();
 
-function duckiesay(message, color = true, animation = true) {
-  const duckie = color ? duck : bwDuck;
+function duckiesay(message, animation = true) {
   console.log(messageBox(message));
-  if (!animation) return console.log(duckie(beaks[0]));
-
-  const interval = setInterval(() => {
-    const beak = beaks[i = ++i % beaks.length];
-    logUpdate(duckie(beak));
-  }, 200);
-
+  if (!animation) return console.log(duck(beaks[0]));
+  const keyframe = () => logUpdate(duck(beaks.next()));
+  const interval = setInterval(() => keyframe(), 200);
   setTimeout(() => clearInterval(interval), 3000);
 }
 
-function messageBox(message) {
-  return boxen(message.trim(), { padding: 1, borderStyle: 'round' });
+function messageBox(message, options = {}) {
+  return boxen(wrapAnsi(message.trim(), 72), {
+    margin: { left: 1 },
+    padding: 1,
+    borderStyle: 'round',
+    ...options
+  });
 }
 
 async function getQuote(quote = '') {
