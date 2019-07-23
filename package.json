@@ -6,7 +6,8 @@
     "duckiesay": "cli.js"
   },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "release": "np"
   },
   "files": [
     "cli.js"
