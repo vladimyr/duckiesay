@@ -95,8 +95,8 @@ function messageBox(message, options = {}) {
   });
 }
 
-async function getQuote(quote = '') {
+async function getQuote(quote = '', timeout = 5000) {
   const url = urlJoin(pkg.config.apiUrl, `/says/${quote}`);
-  const { id, says } = (await got(url, { json: true })).body;
+  const { id, says } = (await got(url, { json: true, timeout })).body;
   return [splitSentences(says), id];
 }
