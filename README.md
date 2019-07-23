@@ -1,4 +1,4 @@
-# duckiesay :duck: [![npm package version](https://img.shields.io/npm/v/duckiesay.svg)](https://npm.im/duckiesay) [![github license](https://img.shields.io/github/license/vladimyr/duckiesay.svg)](https://github.com/vladimyr/duckiesay/blob/master/LICENSE) [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg)](https://github.com/Flet/semistandard)
+# duckiesay :duck: [![build status](https://badgen.net/travis/vladimyr/duckiesay/master)](https://travis-ci.com/vladimyr/duckiesay) [![npm package version](https://badgen.net/npm/v/duckiesay)](https://npm.im/duckiesay) [![github license](https://badgen.net/github/license/vladimyr/duckiesay)](https://github.com/vladimyr/duckiesay/blob/master/LICENSE) [![js semistandard style](https://badgen.net/badge/code%20style/semistandard/pink)](https://github.com/Flet/semistandard)
 
 >Speaking duckie inside your terminal
 
